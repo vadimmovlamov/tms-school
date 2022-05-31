@@ -50,7 +50,7 @@ const mapUsers = (users) => {
         return 1;
     })
 }
-console.log(mapUsers(users)) * /
+console.log(mapUsers(users))
 
 /*  */
 const numbers = [1, 2, 3, 4, 5, 6];
