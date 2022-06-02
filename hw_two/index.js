@@ -10,6 +10,18 @@ const numbers = [1, 2, 3, 4, 5, 6];
 
 console.log(someFunction(numbers));
 
+
+console.log('__ 2 вариант __');
+
+const arrayEven = [1, 2, 3, 4, 5];
+
+const isEven = (arrayNum) => {
+    return arrayEven.map((arrayNum) =>((arrayNum % 2 === 0) ? (arrayNum + 1) : (arrayNum - 1)));
+}
+console.log(isEven(arrayEven));
+
+
+
  //    ___ Task 2 ___
 console.log(' ___ Task 2 ___');
 const words = ['alex', 'Ovechkin', 'oLeG', 'veCn', 'HoHo'];
@@ -22,10 +34,19 @@ const capitalizeFunction = (arrayWords) => {
 
 console.log(capitalizeFunction(words));
 
-//    ___ Task 3 ___
-console.log(' ___ Task 3 ___ - НЕ ВЫПОЛНЕНО');
+console.log('__ 2 вариант __');
+const arrayStr = ['hello', 'wOrlD'];
 
-const users = [
+const stringFunction = () => {
+    return arrayStr.map((element) => (element[0].toUpperCase() + element.slice(1).toLowerCase()));
+}
+console.log(stringFunction(arrayStr));
+
+
+//    ___ Task 3 ___
+console.log(' ___ Task 3 ___ ');
+
+const usersClub = [
     {
         name: 'Alex',
         id: 1,
@@ -39,12 +60,13 @@ const users = [
         id: 3,
     },
 ];
-const removeFunction = (users) => {
-    return users.delete((user) =>{
-        return users.delete();
-    })
+
+const removeArray = (usersClub, list) => {
+    return usersClub.filter(current => !list.includes(current.id)); 
 }
-console.log(removeFunction());
+// как функция понимает, что current это элемент массива usersClub
+// не понимаю зачем мы используем второй аргумент list - Мы его добавляем затем, что бы проверить включается ли элемент по id в наш массив 
+console.log(removeArray(usersClub, [1]));
 
 
 //    ___ Task 4 ___
@@ -80,13 +102,93 @@ const customers = [
         ip_address: '229.179.4.212',
     },
 ];
-const someFunc = (customers) => {
-    return customers[first_name].concat([last_name]);
+const removeElementArray = (customers) => {   // почему переносим сюда customers
+    const women = [];
+    const man = [];
+
+    customers.forEach(({first_name, last_name, ...otherFields}) =>{ // здесь деструктурируем массив, т.е. собираем массив без первых двух элементов
+        const customerToPush = {
+            ...otherFields, // разворачиваем объект, чтобы все было на одном уровне
+            fullName: `${first_name} ${last_name}`
+        }
+        if (customerToPush.gender === 'Male') { 
+            man.push(customerToPush)
+        } else {
+            women.push(customerToPush)
+        }
+    })
+
+    return {
+        women,
+        man
+    }
 }
-console.log(someFunc(users))
+
+console.log(removeElementArray(customers));
 
 //    ___ Task 6 ___
-console.log(' ___ Task 6 ___ НЕ ПОНЯЛ ЗАДАНИЯ');
+console.log(' ___ Task 6 ___ ');
+
+const newReleases = [
+    {
+        id: 70111470,
+        title: "Die Hard",
+        boxart: "https...",
+        url: "https...",
+        rating: [4.0],
+        bookmark: [],
+    },
+    {
+        id: 654356453,
+        title: "Bad Boys",
+        boxart: "https...",
+        url: "https...",
+        rating: [5.0],
+        bookmark: [{ id: 432534, time: 65876586 }],
+    },
+    {
+        id: 65432445,
+        title: "The Chamber",
+        boxart: "https...",
+        url: "https...",
+        rating: [5.0],
+        bookmark: [],
+    },
+    {
+        id: 675465,
+        title: "Fracture",
+        boxart: "https...",
+        url: "https...",
+        rating: [4.0],
+        bookmark: [{ id: 432534, time: 65876586 }],
+    },
+];
+
+// мы должны деструктурировать объект
+// выделить по заданию только id и title
+// и затем вывести объект состоящий из id и title
+
+const mapReal = () => {
+    return newReleases.map(({ id, title }) => {
+        return ({ id, title })
+    })
+}
+
+console.log(mapReal(newReleases));
+
 
 //    ___ Task 7 ___
-console.log(' ___ Task 7 ___ НЕ СМОГ ВЫПОЛНИТЬ');
+console.log(' ___ Task 7 ___ ');
+
+const ratingTop = () => {
+    const result = [];
+    
+    newReleases.forEach(({id, rating}) =>{ // выбираем по заданию только id and rating и деструктурируем
+        if (rating[0] === 5){ // [0] потому что нужен первый элемент массива, т.к. в поле rating  всегда один элемент
+            return result.push(id)
+        }
+    })
+    return result;
+}
+
+console.log(ratingTop(newReleases));
