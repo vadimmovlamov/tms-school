@@ -1,14 +1,69 @@
-//    ___ Task 1 ___
-console.log('___ Task 1 ___');
-const numbers = [1, 2, 3, 4, 5, 6];
+//
+console.log(' ___ Task 1 ___');
 
- const someFunction = (numbers) => {
-    return numbers.map(function(number){
-        return number % 2 === 0 ? (number += 1) : (number -= 1);
-    });    
+const videos = [
+    {
+        id: 6532445,
+        title: 'The Chambre'
+    },
+    {
+        id: 675465,
+        title: 'Fracture'
+    },
+    {
+        id: 70111470,
+        title: 'Die Hard'
+    },
+    {
+        id: 654356453,
+        title: 'Bad Boys'
+    }
+];
+
+const myVideos = (function(videos){
+    return videos.forEach(item => {
+        console.log(`${item.id} : ${item.title}`);
+    });
+})
+
+console.log(myVideos(videos));
+
+//
+console.log(' ___ Task 2 ___');
+
+const boxarts = [
+    {
+        with: 200,
+        height: 200,
+        url: 'http:URL-1'
+    },
+    {
+        with: 150,
+        height: 200,
+        url: 'http:URL-2'
+    },
+    {
+        with: 300,
+        height: 200,
+        url: 'http:URL-3'
+    },
+    {
+        with: 425,
+        height: 150,
+        url: 'http:URL-4'
+    },
+];
+
+const someFunction = (boxart) => {
+    return boxart.map(boxart => [boxartsItem.with] * [boxartsItem.height])
+    const someFunction = (numbers) => {
+        return numbers.map(function (number) {
+            return number % 2 === 0 ? (number += 1) : (number -= 1);
+        });
+    };
 };
 
-console.log(someFunction(numbers));
+console.log(someFunction(boxarts));
 
 
 console.log('__ 2 вариант __');
@@ -16,18 +71,18 @@ console.log('__ 2 вариант __');
 const arrayEven = [1, 2, 3, 4, 5];
 
 const isEven = (arrayNum) => {
-    return arrayEven.map((arrayNum) =>((arrayNum % 2 === 0) ? (arrayNum + 1) : (arrayNum - 1)));
+    return arrayEven.map((arrayNum) => ((arrayNum % 2 === 0) ? (arrayNum + 1) : (arrayNum - 1)));
 }
 console.log(isEven(arrayEven));
 
 
 
- //    ___ Task 2 ___
+//    ___ Task 2 ___
 console.log(' ___ Task 2 ___');
 const words = ['alex', 'Ovechkin', 'oLeG', 'veCn', 'HoHo'];
 
 const capitalizeFunction = (arrayWords) => {
-    return words.map(function(word){
+    return words.map(function (word) {
         return word[0].toUpperCase() + word.slice(1).toLowerCase();
     });
 };
@@ -46,8 +101,7 @@ console.log(stringFunction(arrayStr));
 //    ___ Task 3 ___
 console.log(' ___ Task 3 ___ ');
 
-const usersClub = [
-    {
+const usersClub = [{
         name: 'Alex',
         id: 1,
     },
@@ -62,9 +116,10 @@ const usersClub = [
 ];
 
 const removeArray = (usersClub, list) => {
-    return usersClub.filter(current => !list.includes(current.id)); 
+    return usersClub.filter(current => !list.includes(current.id));
 }
-// как функция понимает, что current это элемент массива usersClub
+
+// как функция понимает, что current  это элемент массива usersClub - current говорит что это ссылка на элемент массива userCub
 // не понимаю зачем мы используем второй аргумент list - Мы его добавляем затем, что бы проверить включается ли элемент по id в наш массив 
 console.log(removeArray(usersClub, [1]));
 
@@ -82,10 +137,9 @@ console.log(polindromFunction('ШалаШ'))
 
 
 //    ___ Task 5 ___
-console.log(' ___ Task 5 ___ НЕ СМОГ ВЫПОЛНИТЬ');
+console.log(' ___ Task 5 ___ ');
 
-const customers = [
-    {
+const customers = [{
         id: 1,
         first_name: 'Jeanette',
         last_name: 'Penddreth',
@@ -102,16 +156,20 @@ const customers = [
         ip_address: '229.179.4.212',
     },
 ];
-const removeElementArray = (customers) => {   // почему переносим сюда customers
+const removeElementArray = (customers) => { // почему переносим сюда customers
     const women = [];
     const man = [];
 
-    customers.forEach(({first_name, last_name, ...otherFields}) =>{ // здесь деструктурируем массив, т.е. собираем массив без первых двух элементов
+    customers.forEach(({
+        first_name,
+        last_name,
+        ...otherFields
+    }) => { // здесь деструктурируем массив, т.е. собираем массив без первых двух элементов
         const customerToPush = {
             ...otherFields, // разворачиваем объект, чтобы все было на одном уровне
             fullName: `${first_name} ${last_name}`
         }
-        if (customerToPush.gender === 'Male') { 
+        if (customerToPush.gender === 'Male') {
             man.push(customerToPush)
         } else {
             women.push(customerToPush)
@@ -129,8 +187,7 @@ console.log(removeElementArray(customers));
 //    ___ Task 6 ___
 console.log(' ___ Task 6 ___ ');
 
-const newReleases = [
-    {
+const newReleases = [{
         id: 70111470,
         title: "Die Hard",
         boxart: "https...",
@@ -144,7 +201,10 @@ const newReleases = [
         boxart: "https...",
         url: "https...",
         rating: [5.0],
-        bookmark: [{ id: 432534, time: 65876586 }],
+        bookmark: [{
+            id: 432534,
+            time: 65876586
+        }],
     },
     {
         id: 65432445,
@@ -160,7 +220,10 @@ const newReleases = [
         boxart: "https...",
         url: "https...",
         rating: [4.0],
-        bookmark: [{ id: 432534, time: 65876586 }],
+        bookmark: [{
+            id: 432534,
+            time: 65876586
+        }],
     },
 ];
 
@@ -169,26 +232,49 @@ const newReleases = [
 // и затем вывести объект состоящий из id и title
 
 const mapReal = () => {
-    return newReleases.map(({ id, title }) => {
-        return ({ id, title })
+    return newReleases.map(({
+        id,
+        title
+    }) => {
+        return ({
+            id,
+            title
+        })
     })
 }
 
-console.log(mapReal(newReleases));
 
+const number = '188';
 
-//    ___ Task 7 ___
-console.log(' ___ Task 7 ___ ');
+const someFunc = (stringValue) => {
+    const splitNum = stringValue.split("");
+    console.log(splitNum);
+    const sum = splitNum.reduce((result, elem) => {
+        return result + Number(elem);
+    }, 0);
+    console.log(sum);
+
+    if (sum > 9){
+        return someFunc(sum.toString());
+    } 
+    return sum;
+
+    console.log(sum);
 
 const ratingTop = () => {
     const result = [];
-    
-    newReleases.forEach(({id, rating}) =>{ // выбираем по заданию только id and rating и деструктурируем
-        if (rating[0] === 5){ // [0] потому что нужен первый элемент массива, т.к. в поле rating  всегда один элемент
+
+    newReleases.forEach(({
+        id,
+        rating
+    }) => { // выбираем по заданию только id and rating и деструктурируем
+        if (rating[0] === 5) { // [0] потому что нужен первый элемент массива, т.к. в поле rating  всегда один элемент
             return result.push(id)
         }
     })
     return result;
 }
+}
 
-console.log(ratingTop(newReleases));
+
+console.log(someFunc(number));

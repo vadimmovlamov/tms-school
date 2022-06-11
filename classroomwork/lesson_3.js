@@ -1,110 +1,34 @@
-const user = {
-    name: 'alex',
-    age: 25,
-    isAproved: false,
-}
-console.log(user.age); // вызов значения по ключу
+console.log('Убрать все пробелы');
 
-user.name = 'jopa' // замена значения свойства объекта по ключу Alex на jopa
-console.log(user.name);
-
-user.adress = 'burdeynogo'; //добавляем новое свойство объекта 
-console.log(user);
+const stringValue = '   Hello     '
+const trimFunction = (element) => element.trim()
+console.log(trimFunction(stringValue));
 
 
-const user2 = user; // копируем ссылку в user2 на объект user
-user2.friends = ['a', 'b']
-console.log(user);
-console.log(user2);
-
-
-// создание независимовй копии, что при копировании не изменялся базовый объект
-const user3 = {...user};
-user3.friends = ['c', 'c']
-console.log(user);
-console.log(user3);
-
-/*  */
+// задача если массив users имеет индексы четные то один цвет наоборот то другой цвет
 console.log('');
-console.log('');
-console.log('вызов callback');
+console.log('colorizer');
 
-const someFunction = (arg) => {
-    return arg();
-}
-
-const sayHello = () => {
-    return 'Hello';
-}
-const sayBuy = () => {
-    return 'Buy';
-}
-
-console.log(someFunction(sayHello)); // sayHello -> это ссылка на функцию, а sayHello() -> вызов функции
-console.log(someFunction(sayBuy));
-
-/*  */
-console.log('');
-console.log('');
-console.log('метод for of');
-
-const numbers = [1, 2, 3, 4, 5];
-
-const funcPow = (numbers) => {
-    const result = [];
-
-for (const number of numbers) {
-    result.push(number * 2) //возвращаем массив усноженный на 2
-}
-    return result;
-}
-console.log(funcPow(numbers));
-
-/*  */
-console.log('');
-console.log('');
-console.log('метод map - 1 вариант');
-
-const methodMap = (numbers) => {
-    return numbers.map((num) => num * 2)
-}
-console.log(methodMap(numbers));
-
-/*  */
-console.log('метод map - 2 вариант');
-const methodMapTwo = (numbers) => numbers.map((item, index) =>{
-    console.log('item', item);
-    console.log('index', index);
-
-    return {
-        value: item,
-        index: index
+const users = [{
+        name: 'alex',
+        age: 12,
+    },
+    {
+        name: 'oleg',
+        age: 25,
     }
-    return item * 2;
-})
-console.log(methodMapTwo(numbers));
-
-/*  */
-// изменяем объект useras и возвращаем без age
-const users = [
-{
-    name: 'alex',
-    age: 12,
-},
-{
-    name: 'oleg',
-    age: 25,
-}
 ]
 
-const arrayWithoutAge = (users) => {
-return users.map((user) => {
-    return {
-        name: user.name
-    }
-})
+const colorizer = (userList) => {
+    return userList.map((userL, indexL) => {
+        return {
+            ...userL,
+            color: indexL % 2 === 0 ? 'red' : 'bluse'
+        }
+    })
 }
-console.log(arrayWithoutAge(users));
+
+console.log(colorizer(users));
 
 
 /*  */
@@ -124,17 +48,126 @@ console.log('метод filter');
 /*задача  вывести четные числа */
 const numberes = [1, 2, 3, 4, 5, 6];
 const filterEven = (numberesList) => {
-    return numberesList.filter((numer) =>{
+    return numberesList.filter((numer) => {
         return (numer % 2 === 0)
     })
 }
-console.log(filterEven(numberes)) 
+console.log(filterEven(numberes))
 
 
 /*  */
 
+console.log('');
+console.log('');
+console.log('мутабельность массивов');
+
+const arrNumbers = [1, 2, 3, 4, 5, 6];
+// метод for of
+const sum = (numberList) => {
+    let result = 0;
+    for (const iterator of numberList) {
+        result += iterator;
+    };
+    return result;
+};
+console.log(sum(arrNumbers));
+
+
+const smthFunction = () => {
+    const result = [];
+    for (const number of arrNumbers) {
+        result.push(number ** 2);
+    };
+    return result;
+}
+console.log(smthFunction())
+
+// метод for
+const sumArr = (numberList) => {
+    let resulter = 0;
+    for (let i = 0; i < numberList.length; i++) {
+        resulter += numberList[i];
+    }
+    return resulter;
+};
+
+console.log('2 => ' + sumArr(arrNumbers));
+
+
+// метод while
+const sumArray = (numberList) => {
+    let resulter = 0;
+    let i = 0;
+    while (i < numberList.length) {
+        resulter += numberList[i];
+        i++;
+    }
+    return resulter;
+};
+
+console.log('3=> ' + sumArray(arrNumbers));
 
 
 console.log('');
 console.log('');
-console.log('метод reduce');
+console.log('__polindrom__');
+
+const isPalindrom = (word) => {
+    const arrayFromChars = word.split('');
+    const reversed = arrayFromChars.reverse();
+    const joined = reversed.join('');
+
+    console.log('Method split = ' + arrayFromChars);
+    console.log('Method reverse = ' + reversed);
+    console.log('Method join = ' + joined);
+
+    return word.toLowerCase() === joined.toLowerCase();
+}
+console.log(isPalindrom('pap'));
+
+
+console.log('');
+console.log('');
+console.log('__polindrom__');
+
+const someFn = (numberList, degree) => {
+    return numberList.map((number) => Math.pow(number, degree))
+}
+console.log(someFn(numbers, 2))
+
+// const someFun = (numberList, degree) => numberList.map((number) => Math.pow(number, degree));
+// console.log(someFun(numbers, 2))
+
+
+console.log('');
+console.log('');
+console.log('__polindrom__');
+
+const arrNumAndStr = [1, 2, 3, 'Hello', 'lol'];
+const smthFunc = (items) => {
+    return arrNumAndStr.map(item => ({
+        value: item,
+        type: typeof item
+    }))
+}
+console.log(smthFunc(numbers))
+
+
+console.log('');
+console.log('');
+console.log('__polindrom__');
+
+const user = {
+    name: 'dsfsfsdf',
+    age: 12,
+    smth: [1, 2, 3, 'Hello', 'lol'],
+    a: 1,
+    b: 'asdasd'
+}
+const {
+    age,
+    a,
+    ...other
+} = user;
+
+console.log(other);
