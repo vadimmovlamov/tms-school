@@ -8,7 +8,7 @@ const arrays = async (array1, array2) => {
         const dataUsers = await responseUsers.json();
         const dataTodos = await responseTodos.json();
 
-        // console.log(dataUsers, dataTodos);
+        console.log(dataUsers, dataTodos);
 
         console.log('first exampl');
         const arraysAgregate = (argId1, argId2) => {
@@ -23,24 +23,6 @@ const arrays = async (array1, array2) => {
             })
         }
         console.log(arraysAgregate(dataUsers, dataTodos));
-
-
-                    /*  */
-
-        console.log('second exampl');
-        
-        const arraysAgregateTwo = (argId1, argId2) => {
-            return argId1.reduce((elemId1) => {
-                const cancatArraysT = argId2.map(elemId2 => elemId2.userId === elemId1.id)
-                // console.log(cancatArrays);
-                return {
-                    ...elemId1,
-                    todos: cancatArraysT
-                }
-            }, {})
-        }
-
-        console.log(arraysAgregateTwo(dataUsers, dataTodos));
         
     } catch (error) {
         

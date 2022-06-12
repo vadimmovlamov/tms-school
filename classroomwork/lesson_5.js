@@ -1,174 +1,219 @@
-var wizards = [
-	{
-		name: 'Harry Potter',
-		house: 'Gryfindor'
-	},
-	{
-		name: 'Cedric Diggory',
-		house: 'Hufflepuff'
-	},
-	{
-		name: 'Tonks',
-		house: 'Hufflepuff'
-	},
-	{
-		name: 'Ronald Weasley',
-		house: 'Gryfindor'
-	},
-	{
-		name: 'Hermione Granger',
-		house: 'Gryfindor'
-	}
+/* const customers = [
+    {
+        id: 1,
+        first_name: 'Jeanette',
+        last_name: 'Penddreth',
+        email: 'jpenddreth0@census.gov',
+        gender: 'Female',
+        ip_address: '26.58.193.2',
+    },
+    {
+        id: 2,
+        first_name: 'Petr',
+        last_name: 'Jackson',
+        email: 'gfrediani1@senate.gov',
+        gender: 'Male',
+        ip_address: '229.179.4.212',
+    },
 ];
 
-var points = {
-	HarryPotter: 500,
-	CedricDiggory: 750,
-	RonaldWeasley: 100,
-	HermioneGranger: 1270
-};
 
-var wizardsAsAnObject = wizards.reduce(function (obj, wizard) {
-    
-	// Get the key for the points object by removing spaces from the wizard's name
-	var key = wizard.name.replace(' ', '');
+const methodReduce = () => {
+    return customers.reduce(accumulator, ({first_name, last_name, ...otherFields}) =>{ // здесь деструктурируем массив, т.е. собираем массив без первых двух элементов
+        const customerToPush = {
+            ...otherFields, // разворачиваем объект, чтобы все было на одном уровне
+            fullName: `${first_name} ${last_name}`
+        }
+        if (customerToPush.gender === 'Male') { 
+            accumulator.man.push(customerToPush)
+        } else {
+            accumulator.women.push(customerToPush)
+        }
+        return accumulator;
+    }, {man: [], women: []})
+}
 
-	// If the wizard has points, add them
-	// Otherwise, set them to 0
-	if (points[key]) {
-		wizard.points = points[key];
-	} else {
-		wizard.points = 0;
-	}
+console.log(methodReduce(customers)); */
 
-	// Remove the name property
-	delete wizard.name;
 
-	// Add wizard data to the new object
-	obj[key] = wizard;
-
-	// Return the array
-	return obj;
-
-}, {});
-
-console.log(wizardsAsAnObject);
-
-//
-console.log(' ___ Task 1 ___');
-
-const videos = [{
-        id: 6532445,
-        title: 'The Chambre'
+const shoes = [{
+        brand: 'nike',
+        size: 42,
+        name: 'airmax'
     },
     {
-        id: 675465,
-        title: 'Fracture'
+        brand: 'adidas',
+        size: 42,
+        name: 'noteroute'
     },
     {
-        id: 70111470,
-        title: 'Die Hard'
+        brand: 'nike',
+        size: 42,
+        name: 'airmax 90'
     },
     {
-        id: 654356453,
-        title: 'Bad Boys'
+        brand: 'puma',
+        size: 42,
+        name: 'ares'
+    },
+    {
+        brand: 'adidas',
+        size: 4,
+        name: 'original'
+    },
+    {
+        brand: 'reebok',
+        size: 42,
+        name: 'ares'
     }
 ];
 
+const aggregateCartItems = (cartItems) => {
+    /*     const result = {};
 
-const myVideos = (function (videos) {
-    return videos.forEach(item => {
-        console.log(`${item.id} : ${item.title}`);
-    });
-})
-/* const myVidos = (function(videos){
-    return videos.reduce(function(accumulator, item){
-        return accumulator.concat(item)
-    },[]);
-});*/
-console.log(myVideos(videos));
-
-
+        cartItems.forEach((cartItem) => {
+            if (!result[cartItem.brand]) {           //если в нашем объекте такого бренда нету brand = nike то
+                result[cartItem.brand] = [cartItem] // то return результат массива с найденым объектом. т.е. создаем новое поле и кладем в него в него массив с найденным первым элементом
+            } else{                                 // если в нашем объекте есть brand = nike
+                result[cartItem.brand].push(cartItem) // тогда добавляем массив и пушим
+            }
+        });
+        return result;
+    } */
 
 
+    return cartItems.reduce((result, cartItem) => {
+        if (!result[cartItem.brand]) {
+            result[cartItem.brand] = [cartItem]
+        } else {
+            result[cartItem.brand].push(cartItem)
+        }
+        return result;
+    }, {})
+
+}
+console.log(aggregateCartItems(shoes))
 
 
+/*  */
 
+// создаем новый элемент объекта из другого объекта
 
-
-
-
-/* const array = [
-    [1, 2, 3],
-    [4, 5, 6]
+const stats = [{
+        title: 'attack',
+        value: 23
+    },
+    {
+        title: 'defend',
+        value: 22
+    }
 ]
 
-const expant = (function (array) {
-    return array.reduce(function (accumulator, item) {
-        return accumulator.concat(item)
-    }, []);
-});
-
-console.log(expant(array)); */
-
-//
-/* const exArray = (dArray) => {
-    return dArray.reduce((resul, subArray) => {
-        return resul.concat(subArray)
-    }, []);
+const statIconMap = {
+    attack: 'Icon1',
+    defend: 'Icon2'
 }
 
-console.log(exArray(array)); */
+const result = stats.map((stat) => ({
+    ...stat,
+    icon: statIconMap[stat.title]
+}))
+console.log(result);
 
 
-//
-/* const b = [[1, 2], [3, 4, 5]].flatMap(item => item *2);
+/*  */
 
-console.log(b) */
+// обращение к полю которого нет
 
-//
-/* const testData = [[1, 2, 3],[4],[8, 7, 6]]
-const expandArray = (doubleArray) => {
-    const res = [];
-    testData.forEach((testData) => {
-        array.forEach((num) => {
-            res.push(num)
-        })
-    });
-    return res;
+const user = {
+    name: 'Pleg'
 }
-console.log(expandArray(testData)); */
+
+const logCity = (user) => {
+    return user.address?.city
+    // когда мы ставим ? и дальше пытаемся обратиться к полю, 
+    // он нам  говорит - я буду пытаться взять city в том случае, если  поел adress не undefined
+}
+console.log(logCity(user));
 
 
-// method 'Flat'
+// деструктурировать массив
 
-const arrayForMap = [
-    [1, 2, 3],
-    [4],
-    [8, 7, 6]
+// const numbers = [1, 2, 3];
+
+// const [, , third] = numbers;
+// const [fisrt, second, third] = numbers;
+// const [fisrt, ...rest] = numbers;
+
+
+// console.log(third);
+
+
+// метод for in
+var wizards = 
+{
+    name: 'Harry Potter',
+    house: 'Gryfindor',
+    na: 'Cedric Diggory',
+    hse: 'Hufflepuff'
+}
+
+for (const key in wizards) {
+    console.log(wizards[key]);
+}
+
+
+//превратить объект в массив
+
+const entries = Object.entries(wizards);
+console.log(entries);
+
+
+//превратить массив in object
+
+const arrayInArray = [
+    [ 'name', 'Harry Potter' ],
+    [ 'house', 'Gryfindor' ],
+    [ 'na', 'Cedric Diggory' ],
+    [ 'hse', 'Hufflepuff' ]
 ]
-
-const expArray = (doublArr) => doublArr.flat();
-console.log(expArray(arrayForMap));
-
+const fromEntries = Object.fromEntries(arrayInArray);
+console.log(fromEntries);
 
 
-async function f() {
-    let promise = new Promise((resolve, reject) => {
-        setTimeout(() => resolve("хреново!"), 1000)
-    });
-    let result = await promise;
-    console.log(result);
-}
-f();
+/* Задача */
 
 //
-console.log(' ___ Task 3 ___');
+const customers = [
+    {
+        id: 1,
+        first_name: 'Jeanette',
+        last_name: 'Penddreth',
+        email: 'jpenddreth0@census.gov',
+        gender: 'Female',
+        ip_address: '26.58.193.2',
+    },
+    {
+        id: 2,
+        first_name: 'Petr',
+        last_name: 'Jackson',
+        email: 'gfrediani1@senate.gov',
+        gender: 'Male',
+        ip_address: '229.179.4.212',
+    },
+];
 
-const numbers = [1,1,2,3];
+const aggregateByGender = (customer) => {
+    return customer.reduce((result, item) => {
+        const gender = item.gender;
 
-const arrFun = numbers.reduce(function(acc, value){
-    acc[value] = (acc[value] || 0) + 1;
-    return acc;
-}, {});
-console.log(arrFun)
+        if (result[gender]) {
+            result[gender].push(item)
+        } else {
+            result[gender] = [item]
+        }
+        return result;
+    }, {})
+}
+
+console.log(aggregateByGender(customers));

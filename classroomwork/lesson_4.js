@@ -115,7 +115,7 @@ console.log('метод filter');
 /* 1 задача */
 const filterEvem = (numbList) => {
     return numbList.filter((numb) => {
-        return numb % 2 ===0
+        return numb % 2 === 0
     })
 }
 console.log(filterEvem(numbers));
@@ -123,7 +123,7 @@ console.log(filterEvem(numbers));
 /* 2 задача */
 const filterEvemName = (nameList) => {
     return nameList.filter((nameAge) => {
-        return nameAge.age >=15
+        return nameAge.age >= 15
     })
 }
 
@@ -135,10 +135,9 @@ console.log('');
 console.log('__метод for each');
 
 // проиндексируем весь массив
-const usersList = [
-    {
-    name: 'ab',
-    age: 5,
+const usersList = [{
+        name: 'ab',
+        age: 5,
     },
     {
         name: 'cd',
@@ -157,21 +156,24 @@ const usersList = [
 const idexUsersMap = usersList.map((item, ind) => {
     return {
         ...item,
-        id : ind,
+        id: ind,
     }
 })
 
 const idexUsersForEch = usersList.forEach((item, ind) => {
     return {
         ...item,
-        id : ind,
+        id: ind,
     }
 });
 
 const idexUsersForEchT = (usersListes) => {
     const result = [];
     usersListes.forEach((item, ind) => {
-        result.push({ ...item, id: ind })
+        result.push({
+            ...item,
+            id: ind
+        })
     })
     return result;
 }
@@ -209,7 +211,7 @@ console.log(expFunction(newArrayNumbers, 2));
 console.log('Задача 2: вернуть массив из объектов и указать тип каждого элемента массива');
 const arrayValues = [1, 'Hello']
 const reverseToObject = (arrays) => {
-    return arrays.map((arr) =>({
+    return arrays.map((arr) => ({
         value: arr,
         type: typeof arr
     }))
@@ -217,8 +219,16 @@ const reverseToObject = (arrays) => {
 console.log(reverseToObject(arrayValues));
 
 console.log('Задача 3: вернуть значение из объекта (деструктуризация)');
-const objArrays = { value: 1, type: 'number', array: [] };
-const {value, array, ...otherElement} = objArrays;
+const objArrays = {
+    value: 1,
+    type: 'number',
+    array: []
+};
+const {
+    value,
+    array,
+    ...otherElement
+} = objArrays;
 console.log(value);
 console.log(array);
 console.log(otherElement);
