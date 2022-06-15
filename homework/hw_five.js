@@ -14,20 +14,20 @@ const arrays = async (array1, array2) => {
         const [user, todos] = await Promise.all([responseUsers, responseTodos]);
 
         const arraysAgregateTwo = todos.reduce((result, todo) => {
-            if (!result[todo.userId]) {         //если аккумулятор не содержит в себе user.id (1,2,3,...)
+            if (!result[todo.userId]) { //если аккумулятор не содержит в себе user.id (1,2,3,...)
                 result[todo.userId] = [todo]; // то тогда я создаю в аккумуляторе единичку поля и присваиваю ей массив
-            } else {                            // если аккумулятор содержит в себе user.id (1,2,3,...)
-                result[todo.userId].push(todo)  // тогда добавляем объкут который состояит из user.id
+            } else { // если аккумулятор содержит в себе user.id (1,2,3,...)
+                result[todo.userId].push(todo) // тогда добавляем объкут который состояит из user.id
             }
             return result;
         }, {})
-        console.log(arraysAgregateTwo);
+        // console.log(arraysAgregateTwo);
 
 
         return user.map((item) => {
             return {
                 ...item,
-                todos: arraysAgregateTwo[item.id]
+                todos: arraysAgregateTwo[item.id] // если есть в item id 1 то вернет к объекту userId по 1
             }
         })
 
@@ -35,4 +35,4 @@ const arrays = async (array1, array2) => {
 
     }
 }
-arrays()
+arrays().then(console.log)
