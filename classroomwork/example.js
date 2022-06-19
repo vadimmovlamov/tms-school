@@ -69,18 +69,18 @@ return obj;
 console.log(wizardsAsAnObject);
 
 
-const arrPairs = ["red", "green", "red", "red","red","red","red","red",];
-function countPairGloves (arr) {
-  const sumGloves = arr.reduce((acc, element) => {
-        acc[element] = (acc[element] || 0) + 1;
-        return acc;
-    }, {})
 
-    let result = 0;
-  Object.keys(sumGloves).forEach((el) => {
-    (result += Math.floor(sumGloves[el] / 2))
-    });
-  return result; 
+
+
+
+
+
+function Rabbit(name) {
+    this.name = name;
 }
 
-console.log(countPairGloves(arrPairs));
+let rabbit = new Rabbit("White Rabbit");
+
+console.log(rabbit.constructor === Rabbit)
+
+let rabbit2 = new rabbit.constructor("Black Rabbit");
