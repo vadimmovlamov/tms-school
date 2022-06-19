@@ -103,7 +103,7 @@ uses.sayNameArrow(); // будет undefind, т.к. у контекста нет
 
 // контекст --> call, aplly, bind
 console.log('');
-console.log('call, aplly, bind');
+console.log('call, aplly');
 
 const user1 = {
     name: 'Oleg',
@@ -121,3 +121,77 @@ function logName(a, b) {
 
 logName.call(user1, 1, 2);
 logName.apply(user2, [1, 2]); // передает аргументы через массив в квадратных скобках
+
+console.log('');
+console.log('bind');
+
+const myBind = logName.bind(user1, 1, 2);
+myBind()
+
+
+/* Ассинхронность в JS */
+
+// promiss
+console.log('');
+console.log('promiss - resolve');
+
+const myPromise = new Promise((resolve, reject) => { // resolve выполнится в том случае, если все хорошо, reject выполнится когда все пойдет плохо
+    setTimeout(() => {
+        resolve('Hello')
+    }, 100);
+})
+myPromise.then(greeting => console.log(greeting)) // это объясняется так - Я обещаю выполниться myPromise. когда then() что то выполнит
+
+
+console.log('');
+console.log('promiss - reject');
+
+const myPromiseTwo = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        reject('afafafafaf')
+    }, 100);
+})
+myPromiseTwo.then(data => console.log(data)).catch(error => {
+    console.log(error)
+})
+
+
+async function f() {
+    let promise = new Promise((resolve, reject) => {
+        setTimeout(() => resolve("хреново!"), 1000)
+    });
+    let result = await promise;
+    console.log(result);
+}
+f();
+
+
+console.log('');
+console.log('промификация');
+
+const promiseCreator = (number) => {
+    return new Promise((resolve, reject) => {
+        if (number % 2 === 0) {
+            resolve('is Even')
+        }
+        reject('errooooooooooooooooooooor')
+    })
+}
+
+promiseCreator(3).then(result => console.log(result)).catch(error => {
+    console.log('Inside catch ', error)
+})
+/* в then мы смотреим положительный результат а в catch мы отлавливаем ошибку */
+
+
+
+
+const asyncLogger = async () => {
+    try {
+        const data = await fetch('https://pokeapi.co/api/v2/pokemon').then(response => response.json());
+    } catch (error) {
+        console.log(error);
+    }
+}
+asyncLogger()
+// await - останавливает выполнение нашего кода до момента прояснения что у нас там происходит  (выполнилось нормально, или чтото с ошибкой)

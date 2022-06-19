@@ -59,11 +59,10 @@ const sumGloves = (elem) => {
         return acc;
     }, {})
 
-    return () //применить метод mapfloor - попробовать
+    // return () //применить метод mapfloor - попробовать
 }
 
-console.log(sumGloves(glovesColor)); ===
-=== =
+console.log(sumGloves(glovesColor));
 var wizards = [{
         name: 'Harry Potter',
         house: 'Gryfindor'
@@ -182,3 +181,8 @@ const arrFun = numbers.reduce(function (acc, value) {
     return acc;
 }, {});
 console.log(arrFun)
+
+
+
+
+

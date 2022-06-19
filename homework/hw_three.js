@@ -1,8 +1,6 @@
-//
 console.log(' ___ Task 1 ___');
 
-const videos = [
-    {
+const videos = [{
         id: 6532445,
         title: 'The Chambre'
     },
@@ -19,262 +17,229 @@ const videos = [
         title: 'Bad Boys'
     }
 ];
+console.log('1 вариант - через for each');
 
-const myVideos = (function(videos){
-    return videos.forEach(item => {
-        console.log(`${item.id} : ${item.title}`);
+const myVideos = (function (videos) {
+    const result = {};
+
+    videos.forEach(video => {
+        result[video.id] = video.title; // ????? что тут происходит
     });
-})
 
+    return result;
+})
 console.log(myVideos(videos));
 
-//
-console.log(' ___ Task 2 ___');
 
-const boxarts = [
-    {
-        with: 200,
+console.log('2 вариант - через reduce');
+
+const reduceVideosMethod = (myVideos) => {
+    return myVideos.reduce((result, video) => {
+        result[video.id] = video.title;
+        return result;
+    }, {})
+}
+console.log(reduceVideosMethod(videos));
+
+
+console.log('2 вариант - через reduce с деструктуризацией');
+
+const reduceVideosMethodDestr = (myVideos) => {
+    return myVideos.reduce((result, {
+        id,
+        title
+    }) => { // {id, title} - прошла деструктуризация
+        result[id] = title;
+        return result;
+    }, {})
+}
+console.log(reduceVideosMethodDestr(videos));
+
+
+
+console.log('');
+console.log(' ___ Task 2 ___ - вывести URL у кого самая большая площадь');
+
+const boxarts = [{
+        width: 200,
         height: 200,
         url: 'http:URL-1'
     },
     {
-        with: 150,
+        width: 150,
         height: 200,
         url: 'http:URL-2'
     },
     {
-        with: 300,
+        width: 300,
         height: 200,
         url: 'http:URL-3'
     },
     {
-        with: 425,
+        width: 425,
         height: 150,
         url: 'http:URL-4'
     },
 ];
 
-const someFunction = (boxart) => {
-    return boxart.map(boxart => [boxartsItem.with] * [boxartsItem.height])
-    const someFunction = (numbers) => {
-        return numbers.map(function (number) {
-            return number % 2 === 0 ? (number += 1) : (number -= 1);
-        });
-    };
-};
+console.log('1 вариант - через map и reduce');
 
-console.log(someFunction(boxarts));
+const getUrl = (boxart) => {
+    const boxartsSquare = boxart.map(({
+        url,
+        width,
+        height
+    }) => ({
+        url: url,
+        square: width * height
+    }));
+    console.log(boxartsSquare);
 
-
-console.log('__ 2 вариант __');
-
-const arrayEven = [1, 2, 3, 4, 5];
-
-const isEven = (arrayNum) => {
-    return arrayEven.map((arrayNum) => ((arrayNum % 2 === 0) ? (arrayNum + 1) : (arrayNum - 1)));
-}
-console.log(isEven(arrayEven));
-
-
-
-//    ___ Task 2 ___
-console.log(' ___ Task 2 ___');
-const words = ['alex', 'Ovechkin', 'oLeG', 'veCn', 'HoHo'];
-
-const capitalizeFunction = (arrayWords) => {
-    return words.map(function (word) {
-        return word[0].toUpperCase() + word.slice(1).toLowerCase();
-    });
-};
-
-console.log(capitalizeFunction(words));
-
-console.log('__ 2 вариант __');
-const arrayStr = ['hello', 'wOrlD'];
-
-const stringFunction = () => {
-    return arrayStr.map((element) => (element[0].toUpperCase() + element.slice(1).toLowerCase()));
-}
-console.log(stringFunction(arrayStr));
-
-
-//    ___ Task 3 ___
-console.log(' ___ Task 3 ___ ');
-
-const usersClub = [{
-        name: 'Alex',
-        id: 1,
-    },
-    {
-        name: 'Tomara',
-        id: 2,
-    },
-    {
-        name: 'Max',
-        id: 3,
-    },
-];
-
-const removeArray = (usersClub, list) => {
-    return usersClub.filter(current => !list.includes(current.id));
-}
-
-// как функция понимает, что current  это элемент массива usersClub - current говорит что это ссылка на элемент массива userCub
-// не понимаю зачем мы используем второй аргумент list - Мы его добавляем затем, что бы проверить включается ли элемент по id в наш массив 
-console.log(removeArray(usersClub, [1]));
-
-
-//    ___ Task 4 ___
-console.log(' ___ Task 4 ___');
-
-const polindromFunction = (str) => {
-    str = str.toLowerCase();
-    return str === str.split('').reverse().join('');
-}
-console.log(polindromFunction('Anna'))
-console.log(polindromFunction('Hello'))
-console.log(polindromFunction('ШалаШ'))
-
-
-//    ___ Task 5 ___
-console.log(' ___ Task 5 ___ ');
-
-const customers = [{
-        id: 1,
-        first_name: 'Jeanette',
-        last_name: 'Penddreth',
-        email: 'jpenddreth0@census.gov',
-        gender: 'Female',
-        ip_address: '26.58.193.2',
-    },
-    {
-        id: 2,
-        first_name: 'Petr',
-        last_name: 'Jackson',
-        email: 'gfrediani1@senate.gov',
-        gender: 'Male',
-        ip_address: '229.179.4.212',
-    },
-];
-const removeElementArray = (customers) => { // почему переносим сюда customers
-    const women = [];
-    const man = [];
-
-    customers.forEach(({
-        first_name,
-        last_name,
-        ...otherFields
-    }) => { // здесь деструктурируем массив, т.е. собираем массив без первых двух элементов
-        const customerToPush = {
-            ...otherFields, // разворачиваем объект, чтобы все было на одном уровне
-            fullName: `${first_name} ${last_name}`
+    return boxartsSquare.reduce((result, everyElementBoxart) => {
+        if (result.square > everyElementBoxart.square) {
+            return result;
         }
-        if (customerToPush.gender === 'Male') {
-            man.push(customerToPush)
+        return everyElementBoxart;
+    }, {}).url // .url - потому что нужно вернуть только элемент поля url
+
+    // сокращенная запись
+    // return boxartsSquare.reduce((result, everyElementBoxart) => result.square > everyElementBoxart.square ? result : everyElementBoxart).url;
+};
+
+console.log(getUrl(boxarts));
+
+console.log('2 вариант - через reduce');
+
+const getUrlReduce = (boxart) => {
+    return boxart.reduce((result, item) => {
+        const resultSqure = result.width * result.height;
+        const nextBoxartSqure = item.width * item.height;
+        // мы сравниваем две плащди текущую resultSqure и следующую nextBoxartSqure
+        return resultSqure > nextBoxartSqure ? result : item;
+    }).url;
+}
+
+console.log(getUrlReduce(boxarts));
+
+
+
+console.log('');
+console.log(' ___ Task 3 ___ - Функция должна вернуть число, которое встречается больше всего раз');
+
+const arrayNumbers = [1, 2, 1, 1, 2, 5, 8, 9, 9, 2, 5, 8, 9, 9, 9, 9]
+
+const maxRepeat = (number) => {
+    const result = {};
+    number.forEach(element => { // сначала через for each считаем сколько каждая цифра встречается раз
+        if (result[element]) { // если element есть в массиве то тогда прибавляем 1
+            result[element] = result[element] + 1
         } else {
-            women.push(customerToPush)
+            result[element] = 1;
         }
+    });
+    console.log(result);
+
+    // переводим в массив что бы поискать через reduce значение которое повторяется
+
+    const entries = Object.entries(result); // переводм в массив массивов
+
+    const [key] = entries.reduce((acc, curentValueArrayEntries) => { // через аккумулятор мы проходимся по каждому элементу массива и смотрим если 9 больше то оно остается и так сравниватся с каждым
+        // acc[1] - значение которое берет первый элемент и сравнивает его с каждым последующим curentValueArrayEntries
+        // curentValueArrayEntries[1] - каждое следующее значение массива entries
+        return acc[1] > curentValueArrayEntries[1] ? acc : curentValueArrayEntries;
     })
 
-    return {
-        women,
-        man
+    return key; // [key] выводим ключ так как в двумерном массиве 
+}
+console.log(maxRepeat(arrayNumbers));
+
+
+
+console.log('');
+console.log(' ___ Task 4 ___ - Результатом выполнения функции должен быть объект, в котором были отсеяны поля со значениями null или undefined');
+
+const arrayOne = {
+    a: 1,
+    b: 'Hello',
+    c: null,
+    z: undefined
+}; // результат { a: 1, b: ‘Hello’ }
+const arrayTwo = {
+    name: 'alex',
+    age: 10,
+    friends: [],
+    address: null
+}; // результат { name: ‘alex’, age: 10, friends: [], }
+
+const deleteFunction = (array) => {
+    const result = {};
+
+    for (const key in array) {
+        if (array[key] !== null && typeof array[key] !== undefined) {
+            result[key] = array[key];
+        }
     }
-}
-
-console.log(removeElementArray(customers));
-
-//    ___ Task 6 ___
-console.log(' ___ Task 6 ___ ');
-
-const newReleases = [{
-        id: 70111470,
-        title: "Die Hard",
-        boxart: "https...",
-        url: "https...",
-        rating: [4.0],
-        bookmark: [],
-    },
-    {
-        id: 654356453,
-        title: "Bad Boys",
-        boxart: "https...",
-        url: "https...",
-        rating: [5.0],
-        bookmark: [{
-            id: 432534,
-            time: 65876586
-        }],
-    },
-    {
-        id: 65432445,
-        title: "The Chamber",
-        boxart: "https...",
-        url: "https...",
-        rating: [5.0],
-        bookmark: [],
-    },
-    {
-        id: 675465,
-        title: "Fracture",
-        boxart: "https...",
-        url: "https...",
-        rating: [4.0],
-        bookmark: [{
-            id: 432534,
-            time: 65876586
-        }],
-    },
-];
-
-// мы должны деструктурировать объект
-// выделить по заданию только id и title
-// и затем вывести объект состоящий из id и title
-
-const mapReal = () => {
-    return newReleases.map(({
-        id,
-        title
-    }) => {
-        return ({
-            id,
-            title
-        })
-    })
-}
-
-
-const number = '188';
-
-const someFunc = (stringValue) => {
-    const splitNum = stringValue.split("");
-    console.log(splitNum);
-    const sum = splitNum.reduce((result, elem) => {
-        return result + Number(elem);
-    }, 0);
-    console.log(sum);
-
-    if (sum > 9){
-        return someFunc(sum.toString());
-    } 
-    return sum;
-
-    console.log(sum);
-
-const ratingTop = () => {
-    const result = [];
-
-    newReleases.forEach(({
-        id,
-        rating
-    }) => { // выбираем по заданию только id and rating и деструктурируем
-        if (rating[0] === 5) { // [0] потому что нужен первый элемент массива, т.к. в поле rating  всегда один элемент
-            return result.push(id)
-        }
-    })
     return result;
 }
+console.log('arrayOne', deleteFunction(arrayOne));
+console.log('arrayTwo', deleteFunction(arrayTwo));
+
+
+
+console.log('');
+console.log(' ___ Task 5 ___ - Функция принимает массив чисел, а возвращает чсло которое встречается лишь 1 раз');
+
+const arrayRepeatNumbers = [1, 2, 1, 1, 2, 5, 8, 9, 9, 2, 5, 8, 9, 9, 9, 9, 7];
+
+const meetNumbers = (numbers) => {
+    const meetNumbering = numbers.reduce((result, number) => { // считаем сколько каждого элемента массива встречается раз
+        if (result[number]) {
+            result[number] += 1;
+        } else {
+            result[number] = 1;
+        };
+        return result;
+    }, {});
+
+    // console.log(meetNumbering);
+
+    for (const key in meetNumbering) {
+        if (meetNumbering[key] === 1) {
+            return key;
+        }
+    }
 }
+console.log(meetNumbers(arrayRepeatNumbers));
 
 
-console.log(someFunc(number));
+
+console.log('');
+console.log(' ___ Task 6 ___ ');
+/*Написать функция, которая принимает строку, 
+и допустимое количество символов. Если длина строки превышает 
+допустимое количество символов, функция должна обрезать строку 
+а в конец добавить многоточие */
+
+const textAndLength = (text, maxLengthNumbers) => {
+    if (text.lenght > maxLengthNumbers) {
+        return text.length - maxLengthNumbers
+    }
+    return `${text.slice(0, maxLengthNumbers)}...`
+}
+console.log(textAndLength('hello', 3));
+
+
+
+console.log('');
+console.log(' ___ Task 7 ___ Написать функцию задержки. Функция принимает задержку в миллисекундах');
+
+const delay = (ms) => { // функция должна возвращать промис а внутри промиса мы выполняем сетайм аут который выполнится
+    return new Promise((resolve) => { // reject не нужен т.к. мы всегда будем получать resolve
+        setTimeout(resolve, ms)
+    })
+}
+const asyncFun = async () => {
+    await delay(1000);
+    console.log('1212');
+}
+asyncFun()

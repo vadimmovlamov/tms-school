@@ -66,7 +66,16 @@ const removeArray = (usersClub, list) => {
         return !list.includes(current.id)
     }); 
 }
+
+const removeArrayShorts = (usersClub, list) => {
+    return usersClub.filter(current => !list.includes(current.id));
+}
+
+// как функция понимает, что current  это элемент массива usersClub - current говорит что это ссылка на элемент массива userCub
+// не понимаю зачем мы используем второй аргумент list - Мы его добавляем затем, что бы проверить включается ли элемент по id в наш массив 
+
 console.log(removeArray(usersClubs, [1]));
+console.log(removeArrayShorts(usersClubs, [1]));
 
 
 //    ___ Task 4 ___
