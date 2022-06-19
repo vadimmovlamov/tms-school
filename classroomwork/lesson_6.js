@@ -195,3 +195,15 @@ const asyncLogger = async () => {
 }
 asyncLogger()
 // await - останавливает выполнение нашего кода до момента прояснения что у нас там происходит  (выполнилось нормально, или чтото с ошибкой)
+
+
+
+
+// подсчет сколько элементов в массиве
+const numbers = [1, 1, 2, 3];
+
+const arrFun = numbers.reduce(function (acc, value) {
+    acc[value] = (acc[value] || 0) + 1;
+    return acc;
+}, {});
+console.log(arrFun)

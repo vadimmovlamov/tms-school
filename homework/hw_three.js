@@ -200,8 +200,14 @@ const meetNumbers = (numbers) => {
         };
         return result;
     }, {});
-
     // console.log(meetNumbering);
+
+//  ----  2 вариант reduce
+// const arrFun = numbers.reduce(function (acc, value) {
+// acc[value] = (acc[value] || 0) + 1;
+// return acc;
+// }, {});
+// console.log(arrFun)
 
     for (const key in meetNumbering) {
         if (meetNumbering[key] === 1) {
@@ -210,6 +216,10 @@ const meetNumbers = (numbers) => {
     }
 }
 console.log(meetNumbers(arrayRepeatNumbers));
+
+
+
+
 
 
 

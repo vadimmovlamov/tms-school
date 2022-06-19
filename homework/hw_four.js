@@ -1,22 +1,37 @@
+console.log('___ Task 1 ___');
+
 const getInfo = async (infoAboutPokemons) => {
     const mainUrl = `https://pokeapi.co/api/v2/pokemon/`;
 
     try {
-        const response = await fetch(mainUrl);
-        const data = await response.json();
+        const pokemons = await fetch(mainUrl).then(response => response.json()); // делаем запрос по mainUrl и сразу же распаковываем его
+        console.log('1 этап', pokemons);
 
-        const array = data.results.map((pokemon) => fetch(pokemon.url).then(response => response.json()));
-        console.log(array);
-        const pokemons = await Promise.all(array);
-        console.log(pokemons);
+        const pokemonDetailRequests = pokemons.results.map((pokemon) => fetch(pokemon.url).then(response => response.json()));
+        // делаем массив запросов по pokemon.url на детальную информацию об покемоне, и также сразу её распаковываем
+        // используем map т.к. массив на входе и массив должен быть на выходе 
+        console.log('2 этап - начало выполнения', pokemonDetailRequests);
+        // закидываем этов в Promise.all для выполнения 
+        const pokemonDetail = await Promise.all(pokemonDetailRequests);
+        console.log('2 этап - конец выполнения', pokemonDetail);
+
+        const result = pokemonDetail.map(pokemon => {
+            return {
+                ...pokemon,
+                stats: pokemon.stats.reduce((statMap, statItem) => {
+                    statMap[statItem.stat.name] = statItem.base_stat; // ключем будет вложенность stats. stat. name
+                    return statMap;
+                }, {})
+            }
+        })
+        console.log('3 этап', result);
+
     } catch (error) {}
 }
 getInfo()
 
 
-
-
-/*  */
+/* _____ 'второй вариант' _____*/
 
 const BASE_URL = "https://pokeapi.co/api/v2/pokemon";
 
@@ -28,7 +43,6 @@ const getPokemons = async () => {
     return results;
 };
 
-
 const getPokemonsDetail = (pokemonsShorList) => {
     const pokemonDetailRequests = pokemonsShorList.map(({
             url
@@ -38,7 +52,6 @@ const getPokemonsDetail = (pokemonsShorList) => {
 
     return Promise.all(pokemonDetailRequests);
 };
-
 
 const statsConverter = (statsList) => {
     return statsList.reduce((statMap, {
@@ -50,7 +63,6 @@ const statsConverter = (statsList) => {
         return statMap;
     }, {});
 };
-
 
 const getAndAggregatePokemons = async () => {
     try {
@@ -69,3 +81,4 @@ const getAndAggregatePokemons = async () => {
         });
     } catch (error) {}
 };
+getAndAggregatePokemons().then((data) => console.log('второй вариант', data));

@@ -31,3 +31,13 @@ const someFunc = (stringValue) => {
 }
 
 console.log(someFunc(number));
+
+
+
+const numbers = [1, 1, 2, 3];
+
+const arrFun = numbers.reduce(function (acc, value) {
+    acc[value] = (acc[value] || 0) + 1;
+    return acc;
+}, {});
+console.log(arrFun)
