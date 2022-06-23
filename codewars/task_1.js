@@ -22,8 +22,9 @@ console.log(someWords('middle'));
 console.log(someWords('A'));
 
 /*  */
+const numb = 370;
 const narcissistic = (value) => {
-    const array = value.split('');
+    const array = value.toString().split('');
 
     const exp = array.map((element) => {
         return (element ** array.length);
@@ -40,22 +41,22 @@ const narcissistic = (value) => {
             return false;
         }
     }
-
 }
 
 console.log(narcissistic('370'));
 console.log(narcissistic('1938'));
 
 
-/*  */
+/* вывести те слова которые === длинне 4 */
 
-const arrayName = ["Ryan", "Kieran", "Jason", "Yous"];
+const arrayName = ["Ryan", "Kieran", "Jason", "Yous", "Ryan", "Kieran"];
 
 const namefunction = (name) => {
     return name.reduce((result, item) => {
-        if (item.length == 4) {
-            return result.item;
+        if (item.length === 4) {
+            result.push(item);
         }
+        return result;
     }, [])
 }
 console.log(namefunction(arrayName));
@@ -79,3 +80,18 @@ const arifmetic = (number) => {
     }
 }
 console.log(arifmetic(numbers));
+
+
+/* перевести из римских в арабские */
+
+const romeArray = {
+    I: 1,
+    V: 5,
+    X: 10,
+    L: 50,
+    C: 100,
+    D: 500,
+    M: 1000
+}
+
+с
