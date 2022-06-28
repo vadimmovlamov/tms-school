@@ -82,7 +82,10 @@ const arifmetic = (number) => {
 console.log(arifmetic(numbers));
 
 
-/* перевести из римских в арабские */
+/* 
+перевести из римских в арабские 
+https://www.codewars.com/kata/51b6249c4612257ac0000005/train/javascript
+*/
 
 const romeArray = {
     I: 1,
@@ -94,4 +97,3 @@ const romeArray = {
     M: 1000
 }
 
-с
