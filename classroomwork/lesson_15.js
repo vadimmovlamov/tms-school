@@ -42,7 +42,7 @@ console.log(bigSum(arrayOfArrays));
 // button.addEventListener('click', debounced);
 console.log('');
 
-
+console.log('вычисление факториала');
 const funFac = (number) => {
     let result = 1;
 
@@ -53,20 +53,32 @@ const funFac = (number) => {
 }
 console.log(funFac(4));
 console.log(funFac(0));
+console.log('');
 
+
+console.log('вычисление числа фибоначи');
+
+const funFibonacci = (num) => (num <= 1) ? num : (funFibonacci(num - 1) + funFibonacci(num - 2))
+
+console.log(funFibonacci(6));
+console.log('');
 
 /* https://www.codewars.com/kata/515de9ae9dcfc28eb6000001/train/javascript */
 
-const getPairs = (char) => {
-    const word = char.split('')
-    
-    if (word.lenght % 2 === 0) {
-        
-    } else {
-        
+const getPairs = (str) => {
+
+    if (str.length % 2 !== 0) {
+        str += '_'
     }
 
+    let result = []
 
+    for (const i = 0; i < str.length; i = i + 2) {
+        if (str.length % 2 === 0) {
+            return result.push(str.slice(i, i + 2))
+        }
+        return result;
+    }
 
 }
- console.log(getPairs('abcdefg'));
+console.log(getPairs('abcdef'));
