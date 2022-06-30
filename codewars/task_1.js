@@ -97,3 +97,27 @@ const romeArray = {
     M: 1000
 }
 
+
+
+
+
+
+console.log('');
+/* https://www.codewars.com/kata/5b02fa2d86d07558c40000c5/train/javascript  */
+const array = [12, 5, 13]
+
+const pytrip = (num) => {
+    num.reduce((acc, elem) => {
+        return acc + elem**2
+    }, 0)
+}
+console.log(pytrip(array));
+
+
+
+const mas = [1,2,3,4,5]
+const minMax = mas.reduce((acc, m) => {
+    return 
+}, [])
+
+console.log(Math.max(...mas));

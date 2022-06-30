@@ -64,21 +64,24 @@ console.log(funFibonacci(6));
 console.log('');
 
 /* https://www.codewars.com/kata/515de9ae9dcfc28eb6000001/train/javascript */
-
+/* 
+* 'abc' =>  ['ab', 'c_']
+* 'abcdef' => ['ab', 'cd', 'ef']
+*/
 const getPairs = (str) => {
 
-    if (str.length % 2 !== 0) {
-        str += '_'
-    }
+    const result = []
 
-    let result = []
-
-    for (const i = 0; i < str.length; i = i + 2) {
-        if (str.length % 2 === 0) {
-            return result.push(str.slice(i, i + 2))
+    for (let i = 0; i < str.length; i += 2) {
+        if (str[i + 1]) {
+            result.push(`${str[i]}${str[i+1]}`)
+        } else {
+            result.push(`${str[i]}_`)
         }
-        return result;
     }
-
+    return result;
 }
-console.log(getPairs('abcdef'));
+console.log(getPairs('abcdlej'));
+
+
+/*  */
