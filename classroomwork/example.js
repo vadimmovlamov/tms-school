@@ -87,3 +87,25 @@ let rabbit2 = new rabbit.constructor("Black Rabbit");
 
 
 
+
+// let a = {
+//     value: 10
+// }
+// console.log(a);
+
+// let b = {
+//     age: a
+// }
+// b.age.value = 21
+
+// console.log(b);
+
+// let c = a
+
+
+const res = (a, b) => {
+    return a * b
+}
+// res(2)(3)
+// console.log(res(2)(3));
+console.log(res(2,3));
